@@ -1,18 +1,18 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
-const GroupMember = sequelize.define('GroupMember', {
-  group_member_id: {
+const Comment = sequelize.define('Comment', {
+  comment_id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  group_id: {
+  task_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'groups',   
-      key: 'group_id'
+      model: 'tasks',
+      key: 'task_id'
     },
     onDelete: 'CASCADE'
   },
@@ -20,23 +20,22 @@ const GroupMember = sequelize.define('GroupMember', {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'users',    
+      model: 'users',
       key: 'user_id'
     },
     onDelete: 'CASCADE'
   },
-  role: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-    defaultValue: 'Member'
+  comment_text: {
+    type: DataTypes.TEXT,
+    allowNull: false
   },
-  joined_at: {
+  created_at: {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: DataTypes.NOW
   }
 }, {
-  tableName: 'group_members'
+  tableName: 'comments'
 });
 
-module.exports = GroupMember;
+module.exports = Comment;

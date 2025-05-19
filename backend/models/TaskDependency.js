@@ -1,42 +1,45 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
-const GroupMember = sequelize.define('GroupMember', {
-  group_member_id: {
+const TaskDependency = sequelize.define('TaskDependency', {
+  dependency_id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  group_id: {
+  task_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'groups',   
-      key: 'group_id'
+      model: 'tasks',
+      key: 'task_id'
     },
     onDelete: 'CASCADE'
   },
-  user_id: {
+  depends_on_task_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'users',    
-      key: 'user_id'
+      model: 'tasks',
+      key: 'task_id'
     },
     onDelete: 'CASCADE'
   },
-  role: {
+  dependency_type: {
     type: DataTypes.STRING(50),
     allowNull: false,
-    defaultValue: 'Member'
+    validate: {
+      isIn: [['Blocks', 'Precedes', 'Related']]
+    }
   },
-  joined_at: {
+  created_at: {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: DataTypes.NOW
   }
 }, {
-  tableName: 'group_members'
+  tableName: 'task_dependencies',
+  timestamps: false
 });
 
-module.exports = GroupMember;
+module.exports = TaskDependency;

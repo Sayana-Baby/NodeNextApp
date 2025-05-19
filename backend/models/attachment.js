@@ -1,42 +1,45 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
-const GroupMember = sequelize.define('GroupMember', {
-  group_member_id: {
+const Attachment = sequelize.define('Attachment', {
+  attachment_id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  group_id: {
+  task_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'groups',   
-      key: 'group_id'
+      model: 'tasks',
+      key: 'task_id'
     },
     onDelete: 'CASCADE'
   },
-  user_id: {
+  file_url: {
+    type: DataTypes.STRING(255),
+    allowNull: false
+  },
+  file_name: {
+    type: DataTypes.STRING(255),
+    allowNull: false
+  },
+  uploaded_by: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'users',    
+      model: 'users',
       key: 'user_id'
     },
-    onDelete: 'CASCADE'
+    onDelete: 'SET NULL'
   },
-  role: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-    defaultValue: 'Member'
-  },
-  joined_at: {
+  uploaded_at: {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: DataTypes.NOW
   }
 }, {
-  tableName: 'group_members'
+  tableName: 'attachments'
 });
 
-module.exports = GroupMember;
+module.exports = Attachment;
