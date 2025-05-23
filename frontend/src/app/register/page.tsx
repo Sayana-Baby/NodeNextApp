@@ -30,7 +30,7 @@ export default function RegisterPage() {
 
   return (
     <>
-      {/* Navbar */}
+      {/* Navbar*/}
       <nav className={styles.navbar}>
         <span className={styles.navTitle}>Smart Task Manager</span>
         <ul className={styles.navLinks}>
