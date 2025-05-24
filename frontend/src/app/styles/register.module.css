@@ -1,0 +1,185 @@
+/* register.module.css */
+
+/* Root variables for easy theming */
+:root {
+    --primary: #4f8cff;
+    --secondary: #f5f7fa;
+    --accent: #ffb347;
+    --danger: #ff4f4f;
+    --radius: 1.2rem;
+    --shadow: 0 4px 24px rgba(79, 140, 255, 0.12);
+    --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-main: 'Inter', Arial, sans-serif;
+}
+
+/* Container for the registration form */
+.registerContainer {
+    background: var(--secondary);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 420px;
+    margin: 3rem auto;
+    padding: 2.5rem 2rem;
+    font-family: var(--font-main);
+    animation: fadeIn 0.8s;
+}
+
+/* Animated gradient border */
+.registerContainer {
+    position: relative;
+    z-index: 1;
+}
+.registerContainer::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    z-index: -1;
+    border-radius: calc(var(--radius) + 3px);
+    background: linear-gradient(120deg, var(--primary), var(--accent), var(--primary));
+    background-size: 200% 200%;
+    animation: borderMove 3s linear infinite;
+}
+@keyframes borderMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Form title */
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+    text-align: center;
+}
+
+/* Input fields */
+.inputGroup {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+.label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    color: #222;
+}
+.input {
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #dbeafe;
+    border-radius: 0.7rem;
+    background: #fff;
+    font-size: 1rem;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+.input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.15);
+    outline: none;
+}
+
+/* Error message */
+.error {
+    color: var(--danger);
+    font-size: 0.95rem;
+    margin-top: 0.3rem;
+    min-height: 1.2em;
+}
+
+/* Submit button */
+.button {
+    width: 100%;
+    padding: 0.9rem 0;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(79, 140, 255, 0.10);
+    transition: background var(--transition), transform var(--transition);
+}
+.button:hover, .button:focus {
+    background: linear-gradient(90deg, var(--accent), var(--primary));
+    transform: translateY(-2px) scale(1.03);
+}
+
+/* Link to login */
+.loginLink {
+    display: block;
+    margin: 1.5rem auto 0;
+    text-align: center;
+    color: var(--primary);
+    text-decoration: underline;
+    font-size: 1rem;
+    transition: color var(--transition);
+}
+.loginLink:hover {
+    color: var(--accent);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .registerContainer {
+        padding: 1.2rem 0.7rem;
+        max-width: 98vw;
+    }
+    .title {
+        font-size: 1.4rem;
+    }
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+/* === Navbar === */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 1rem 2rem;
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: var(--shadow);
+    font-family: var(--font-main);
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navTitle {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.5px;
+}
+
+.navLinks {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.navLink {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.navLink:hover {
+    color: var(--primary);
+}
+.navLink.active {
+    color: var(--primary);
+    font-weight: 700;
+}

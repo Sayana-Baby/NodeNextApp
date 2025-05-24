@@ -1,0 +1,74 @@
+.dashboardContainer {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+.header {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #111827;
+}
+
+.summarySection {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.card {
+  flex: 1;
+  min-width: 160px;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.recentSection,
+.aiSection {
+  margin-bottom: 2rem;
+}
+
+.taskList {
+  list-style: none;
+  padding: 0;
+}
+
+.taskItem {
+  background: #fff;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-left: 6px solid #d1d5db;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statusToDo {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.statusInProgress {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.statusCompleted {
+  color: #10b981;
+  font-weight: 600;
+}
+.taskTitle {
+  font-size: 1.2rem;
+  color: #111827;
+}
