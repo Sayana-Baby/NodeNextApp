@@ -4,7 +4,10 @@ const { connectDB } = require("./db");
 
 const app = express();
 const PORT = 3000;
+const userRouter = require('./app/');
 
+
+app.use('/api/user', userRouter);
 
 app.listen(PORT, async () => {
 
@@ -19,4 +22,3 @@ app.listen(PORT, async () => {
 app.get("/", (req, res) => {
     res.send(" Express App Running!");
 });
-
