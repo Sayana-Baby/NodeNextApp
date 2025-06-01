@@ -49,6 +49,8 @@ async function connectDB() {
 
 
     await sequelize.authenticate();
+
+
     await sequelize.sync({ alter: true });
     console.log('Connected to PostgreSQL successfully with Sequelize!');
   } catch (error) {

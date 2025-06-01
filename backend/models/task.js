@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../db');
+const {sequelize} = require('../db');
 
 const Task = sequelize.define('Task', {
   task_id: {
@@ -24,6 +24,16 @@ const Task = sequelize.define('Task', {
     },
     onDelete: 'CASCADE'
   },
+  assigned_to: {
+  type: DataTypes.INTEGER,
+  allowNull: true,
+  references: {
+    model: 'users',
+    key: 'user_id'
+  },
+  onDelete: 'SET NULL'
+},
+
   created_at: {
     type: DataTypes.DATE,
     allowNull: false,

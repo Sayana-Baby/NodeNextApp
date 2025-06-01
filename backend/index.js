@@ -10,9 +10,11 @@ app.use(cors({
 }));
 const PORT = 4000;
 const userRouter = require('./routes/user.route');
+const taskRoutes = require('./routes/task.route');
 app.use(express.json());
 
 app.use('/api/user', userRouter);
+app.use('/api/task',taskRoutes)
 
 app.listen(PORT, async () => {
 

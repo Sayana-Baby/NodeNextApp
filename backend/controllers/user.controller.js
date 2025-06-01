@@ -5,7 +5,7 @@ const { genResponse } = require("../helpers/commonHelpers");
 const JWT_SECRET="smart_task_jwt_secret"
 exports.register = async (req, res) => {
     try {
-        console.log(req.body)
+    
         const {
             email,
             first_name,
@@ -56,9 +56,9 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-console.log(req.body)
+
         const user = await User.findOne({ where: { email } });
-console.log(user)
+
         if (!user) {
             return res.status(404).json(genResponse(false, "User not found"));
         }
