@@ -5,7 +5,7 @@ import Link from 'next/link';
 import styles from '../styles/login.module.css';
 
 export default function Login() {
-  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const router = useRouter();
 
@@ -13,7 +13,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:4000/api/auth/login', {
+      const res = await fetch('http://localhost:4000/api/user/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -27,10 +27,10 @@ export default function Login() {
       }
 
       // ✅ Store token (or use HTTP-only cookies for security)
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('token', data.data.token);
 
       // Optionally decode the token to get the role
-      const payload = JSON.parse(atob(data.token.split('.')[1]));
+      const payload = JSON.parse(atob(data.data.token.split('.')[1]));
 
       // ✅ Redirect based on role
       if (payload.role === 'admin') {
@@ -73,12 +73,11 @@ export default function Login() {
           <div className={styles.inputGroup}>
             <input
               className={styles.input}
-              type="text"
-              placeholder="Enter username"
-              minLength={5}
-              name="username"
+              type="email"
+             
+              name="email"
               required
-              value={formData.username}
+              value={formData.email}
               onChange={handleChange} />
           </div>
 

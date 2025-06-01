@@ -17,7 +17,7 @@ exports.register = async (req, res) => {
         } = req.body;
 
 
-        if (!email || !first_name || !last_name || !password || !role) {
+        if (!email || !first_name  || !password || !role) {
             return res.status(400).json(genResponse(false, "Missing required fields."));
         }
 
@@ -37,7 +37,7 @@ exports.register = async (req, res) => {
 
 
         const token = jwt.sign(
-            { id: newUser.user_id, email: newUser.email },
+            { id: newUser.user_id, email: newUser.email,role: newUser.role },
             JWT_SECRET,
             { expiresIn: '1d' }
         );
@@ -56,9 +56,9 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-
+console.log(req.body)
         const user = await User.findOne({ where: { email } });
-
+console.log(user)
         if (!user) {
             return res.status(404).json(genResponse(false, "User not found"));
         }
@@ -72,7 +72,7 @@ exports.login = async (req, res) => {
 
 
         const token = jwt.sign(
-            { id: user.user_id, email: user.email },
+            { id: user.user_id, email: user.email , role: user.role},
             JWT_SECRET,
             { expiresIn: "1d" }
         );

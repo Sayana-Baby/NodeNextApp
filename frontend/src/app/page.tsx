@@ -7,11 +7,11 @@ export default function Home() {
   const [contact, setContact] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const res = await fetch('/api/contact', {
@@ -31,17 +31,13 @@ export default function Home() {
       <nav className={styles.navbar}>
         <div className={styles.navLogo}>TaskManager</div>
         <ul className={styles.navLinks}>
+          <li><a href="#aboutus" className={styles.navLink}>About Us</a></li>
+          <li><a href="#features" className={styles.navLink}>Features</a></li>
+          <li><a href="#contact" className={styles.navLink}>Contact</a></li>
           <li>
-            <a href="#aboutus" className={styles.navLink}>About Us</a>
-          </li>
-          <li>
-            <a href="#features" className={styles.navLink}>Features</a>
-          </li>
-          <li>
-            <a href="#contact" className={styles.navLink}>Contact</a>
-          </li>
-          <li>
-            <a href="/dashboard" className={styles.navLink}>Dashbaord</a>
+            <Link href="/dashboard">
+              Dashboard
+            </Link>
           </li>
         </ul>
       </nav>
@@ -54,15 +50,19 @@ export default function Home() {
             Plan, assign, and track your work with AI-powered insights — built for individuals, teams, and communities.
           </p>
           <div className={styles.buttonGroup}>
-            <Link href="/register" className={styles.linkButton}>Get Started</Link>
-            <Link href="/login" className={styles.linkButtonAlt}>Login</Link>
+            <Link href="/register">
+              Get Started
+            </Link>
+            <Link href="/login">
+              Login
+            </Link>
           </div>
         </div>
       </section>
 
       {/* FEATURES SECTION */}
       <section className={styles.features} id="features">
-        <h2>Features That Empower You</h2>
+        <h2 className={styles.featuresTitle}>Features That Empower You</h2>
         <div className={styles.featureCards}>
           <div className={styles.card}>
             <h3>AI Task Suggestions</h3>
@@ -81,43 +81,49 @@ export default function Home() {
 
       {/* CONTACT FORM */}
       <section className={styles.contactForm} id="contact">
-        <h2>Contact Us</h2>
-        <p>Have a question, suggestion, or need help? Reach out — we’d love to hear from you!</p>
+        <h2 className={styles.contactTitle}>Contact Us</h2>
+        <p className={styles.contactDesc}>
+          Have a question, suggestion, or need help? Reach out — we’d love to hear from you!
+        </p>
         {submitted ? (
           <p className={styles.success}>✅ Thank you! We'll get back to you shortly.</p>
         ) : (
-          <form onSubmit={handleSubmit} className={styles.formGrid}>
-        <div className={styles.formRow}>
-          <input
-            name="name"
-            placeholder="Your Name"
-            required
-            value={contact.name}
-            onChange={handleChange}
-            className={styles.input}
-          />
-          <input
-            name="email"
-            type="email"
-            placeholder="Your Email"
-            required
-            value={contact.email}
-            onChange={handleChange}
-            className={styles.input}
-          />
-        </div>
-        <div className={styles.formRow}>
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            required
-            value={contact.message}
-            onChange={handleChange}
-            className={styles.textarea}
-            rows={4}
-          />
-        </div>
-        <button type="submit" className={styles.submitButton}>Send Message</button>
+          <form onSubmit={handleSubmit} className={styles.formGrid} noValidate>
+            <div className={styles.formRow}>
+              <input
+                name="name"
+                placeholder="Your Name"
+                required
+                value={contact.name}
+                onChange={handleChange}
+                className={styles.input}
+                autoComplete="name"
+              />
+              <input
+                name="email"
+                type="email"
+                placeholder="Your Email"
+                required
+                value={contact.email}
+                onChange={handleChange}
+                className={styles.input}
+                autoComplete="email"
+              />
+            </div>
+            <div className={styles.formRow}>
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                required
+                value={contact.message}
+                onChange={handleChange}
+                className={styles.textarea}
+                rows={4}
+              />
+            </div>
+            <button type="submit" className={styles.submitButton} aria-label="Send message">
+              Send Message
+            </button>
           </form>
         )}
       </section>

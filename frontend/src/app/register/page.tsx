@@ -20,11 +20,51 @@ export default function RegisterPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Validate and send to backend
-    console.log('Submitted:', formData);
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (formData.password !== formData.confirmPassword) {
+    alert("Passwords do not match");
+    return;
+  }
+
+  const payload = {
+    email: formData.email,
+    first_name: formData.username.split(" ")[0] || formData.username,
+    last_name: formData.username.split(" ")[1] || "", 
+    password: formData.password,
+    role: formData.role,
+    profile_picture: "", 
+    notification_prefs: {
+      email: true,
+      push: false,
+    },
   };
+
+  try {
+    const res = await fetch("http://localhost:4000/api/user/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("Registered successfully!");
+      console.log("Token:", data.data?.token);
+    
+    } else {
+      alert(data.message || "Registration failed");
+    }
+  } catch (err) {
+    console.error("Registration error:", err);
+    alert("Something went wrong");
+  }
+};
+
 
   const isManager = formData.role === 'manager';
 
