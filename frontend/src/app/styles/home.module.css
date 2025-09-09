@@ -10,9 +10,9 @@
   --shadow: 0 8px 32px rgba(59, 130, 246, 0.08);
   --radius: 1.2rem;
   --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --glass: rgba(255,255,255,0.25);
+  --glass: rgba(255, 255, 255, 0.25);
   --glass-blur: blur(18px);
-  --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-main: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -46,12 +46,17 @@ body {
   top: 0;
   z-index: 1000;
   box-shadow: 0 4px 24px rgba(59, 130, 246, 0.07);
-  animation: fadeInDown 0.7s;
 }
 
 @keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-30px);}
-  to { opacity: 1; transform: translateY(0);}
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .navLogo {
@@ -125,8 +130,14 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px);}
-  to { opacity: 1; transform: translateY(0);}
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .heroContent {
@@ -137,8 +148,14 @@ body {
 }
 
 @keyframes fadeInLeft {
-  from { opacity: 0; transform: translateX(-40px);}
-  to { opacity: 1; transform: translateX(0);}
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .title {
@@ -173,7 +190,7 @@ body {
   text-decoration: none;
   font-size: 1.1rem;
   transition: background 0.3s, color 0.3s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.10);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
   border: none;
 }
 
@@ -270,8 +287,14 @@ body {
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px);}
-  to { opacity: 1; transform: translateY(0);}
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .contactForm h2 {
@@ -341,7 +364,7 @@ body {
   cursor: pointer;
   margin-top: 1rem;
   transition: background 0.3s, transform 0.2s;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.10);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
 }
 
 .submitButton:hover {
