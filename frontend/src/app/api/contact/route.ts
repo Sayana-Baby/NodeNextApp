@@ -1,16 +1,24 @@
 import nodemailer from 'nodemailer';
 
-// WARNING: Hardcoding credentials is NOT recommended for production.
-// This is for demonstration/testing only.
-const EMAIL_USER = 'nygilbinoy83@gmail.com';
-const EMAIL_PASS = 'MIKHAEL@83';
-const EMAIL_RECEIVER = 'nygilbinoy83@gmail.com';
+// SECURE: Load credentials from environment variables
+const EMAIL_USER = process.env.EMAIL_USER;
+const EMAIL_PASS = process.env.EMAIL_PASS;
+const EMAIL_RECEIVER = process.env.EMAIL_RECEIVER;
 
 // Next.js App Router API route
 export async function POST(req: Request) {
+  // Check for missing environment variables
+  if (!EMAIL_USER || !EMAIL_PASS || !EMAIL_RECEIVER) {
+    console.error("Missing required environment variables for sending email.");
+    return new Response(JSON.stringify({ error: 'Server is not configured to send emails.' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
   const { name, email, message } = await req.json();
 
-  // Configure your transporter with hardcoded credentials
+  // Configure your transporter
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -22,7 +30,7 @@ export async function POST(req: Request) {
   try {
     await transporter.sendMail({
       from: `"Task Manager Contact" <${EMAIL_USER}>`,
-      to: EMAIL_RECEIVER || EMAIL_USER,
+      to: EMAIL_RECEIVER,
       subject: `New Contact Form Message from ${name}`,
       html: `
         <h2>New Message from Task Manager</h2>

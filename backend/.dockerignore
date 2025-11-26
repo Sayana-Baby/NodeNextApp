@@ -1,0 +1,29 @@
+# Docker artifacts
+Dockerfile
+
+# Git
+.git
+.gitignore
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment files
+.env
+*.env
+
+# IDE and editor directories
+.vscode/
+.idea/
+
+# Test reports
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local database files
+*.db
+*.sqlite3

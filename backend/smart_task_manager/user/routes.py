@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from smart_task_manager.models import User, Task
 from smart_task_manager.database import db
+from smart_task_manager.utils import generate_cloudinary_signature
 
 user_bp = Blueprint("user", __name__)
 
@@ -37,3 +38,11 @@ def create_task():
         "assigned_to": user.name,
         "status": new_task.status
     }), 201
+
+@user_bp.route("/generate-upload-signature", methods=["GET"])
+def get_upload_signature():
+    """
+    Endpoint to provide the frontend with a secure signature for Cloudinary uploads.
+    """
+    signature_data = generate_cloudinary_signature()
+    return jsonify(signature_data)

@@ -1,11 +1,17 @@
+import os
 from flask import Flask
 from smart_task_manager.user import routes as user_routes
 from smart_task_manager.database import db
 
 app = Flask(__name__)
 
-# PostgreSQL config
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:12345678@localhost:5432/smart_task_db'
+# PostgreSQL config - SECURELY load from environment variable
+database_url = os.environ.get('DATABASE_URL')
+if not database_url:
+    print("WARNING: DATABASE_URL environment variable not set. Using insecure default for local development.")
+    database_url = 'postgresql://postgres:12345678@localhost:5432/smart_task_db'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize the database
